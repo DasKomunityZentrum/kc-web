@@ -76,20 +76,21 @@ class DepartmentPresenter extends Presenter
         }
     }
 
+    /**
+     * @param int|null $id
+     */
     public function renderEdit(int $id = null)
     {
         if ($id) {
             $functions = $this->department2FunctionFacade->getByLeftId($id);
-            $functions2Members = $this->department2Functions2MembersFacade->getByDepartmentId($id);
+            $functions2Members = $this->department2Functions2MembersFacade->getByDepartmentId($id)->functions;
         } else {
             $functions = [];
             $functions2Members = [];
         }
 
-        bdump($functions2Members);
-
         $this->template->functions = $functions;
-        $this->template->functions2Members = $functions2Members->functions;
+        $this->template->functions2Members = $functions2Members;
     }
 
     #[NoReturn]
@@ -100,6 +101,9 @@ class DepartmentPresenter extends Presenter
         $this->redirect('Department:default');
     }
 
+    /**
+     * @return Form
+     */
     public function createComponentDepartmentForm() : Form
     {
         $form = new KCForm();
