@@ -86,6 +86,15 @@ class DepartmentFunctionMemberPresenter extends \Nette\Application\UI\Presenter
         $this->memberManager = $memberManager;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
 
     public function renderDefault()
     {

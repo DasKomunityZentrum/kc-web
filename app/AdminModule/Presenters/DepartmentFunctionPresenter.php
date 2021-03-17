@@ -76,12 +76,19 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         $this->memberManager = $memberManager;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
 
     public function renderDefault()
     {
         $relations = $this->department2FunctionFacade->getAll();
-
-        bdump($relations);
 
         $this->template->relations = $relations;
     }
@@ -107,9 +114,12 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
             ->setDefaultValue($functionId);
     }
 
+    /**
+     * @param int|null $departmentId
+     * @param int|null $functionId
+     */
     public function renderEdit(int $departmentId = null, int $functionId = null)
     {
-
     }
 
     public function actionDelete(int $departmentId, int $functionId)

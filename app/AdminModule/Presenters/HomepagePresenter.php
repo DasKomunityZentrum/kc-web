@@ -14,11 +14,17 @@ use Nette;
  */
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    public function __construct(Connection $dibi)
+    public function startup()
     {
-        $dibi->select('*')
-            ->from('member')
-            ->fetchAll();
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
     }
 
+    public function renderDefault()
+    {
+    }
 }

@@ -142,6 +142,16 @@ class MemberPresenter extends Presenter
         $this->member2Departments2FunctionsFacade = $member2Departments2FunctionsFacade;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
+
     public function renderDefault()
     {
         $members = $this->memberFacade->getAll();

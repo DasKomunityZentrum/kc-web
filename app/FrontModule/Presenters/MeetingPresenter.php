@@ -25,6 +25,11 @@ class MeetingPresenter extends Presenter
      */
     private MeetingFacade $meetingFacade;
 
+    /**
+     * MeetingPresenter constructor.
+     *
+     * @param MeetingFacade $meetingFacade
+     */
     public function __construct(MeetingFacade $meetingFacade)
     {
         parent::__construct();
@@ -38,5 +43,6 @@ class MeetingPresenter extends Presenter
 
         $this->template->meetings = $meetings;
         $this->template->meetingCount = count($meetings);
+        $this->template->types = \App\AdminModule\Presenters\MeetingPresenter::$meetingTypes;
     }
 }

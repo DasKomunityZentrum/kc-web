@@ -21,6 +21,7 @@ services:
 		setup:
 			- addFilter(active, @App\FrontModule\Filters\ActiveFilter)
 			- addFilter(age, @App\FrontModule\Filters\AgeFilter)
+			- addFilter(array, @App\Filters\ArrayFilter)
 			- addFilter(bool, @App\Filters\BoolFilter)
 			- addFilter(branch, @App\AdminModule\Filters\BranchFilter)
 			- addFilter(city, @App\FrontModule\Filters\CityFilter)
@@ -33,6 +34,7 @@ services:
 			- addFilter(gender, @App\FrontModule\Filters\GenderFilter)
 			- addFilter(adminMeeting, @App\AdminModule\Filters\MeetingFilter)
 			- addFilter(frontMeeting, @App\FrontModule\Filters\MeetingFilter)
+			- addFilter(meetingCount, @App\FrontModule\Filters\MeetingCountFilter)
 			- addFilter(member, @App\Filters\MemberFilter)
 			- addFilter(memberCount, @App\FrontModule\Filters\MemberCountFilter)
 			- addFilter(memberDescription, @App\FrontModule\Filters\MemberDescriptionFilter)
@@ -71,6 +73,8 @@ services:
 		class: App\Model\Facades\MemberFacade
 	Member2FunctionFacade:
 		class: App\Model\Facades\Member2FunctionFacade
+	Member2FunctionsFacade:
+		class: App\Model\Facades\Member2FunctionsFacade
 	Member2MeetingFacade:
 		class: App\Model\Facades\Member2MeetingFacade
 	CauseFacade:
@@ -81,6 +85,8 @@ services:
 		class: App\Model\Facades\Department2Functions2MembersFacade
 	Departments2Functions2MembersFacade:
 		class: App\Model\Facades\Departments2Functions2MembersFacade
+	Function2MembersFacade:
+		class: App\Model\Facades\Function2MembersFacade
 	Member2Departments2FunctionsFacade:
 		class: App\Model\Facades\Member2Departments2FunctionsFacade
 	MeetingFacade:
@@ -91,6 +97,8 @@ services:
 		class: App\FrontModule\Filters\ActiveFilter
 	AgeFilter:
 		class: App\FrontModule\Filters\AgeFilter
+	ArrayFilter:
+		class: App\Filters\ArrayFilter
 	BoolFilter:
 		class: App\Filters\BoolFilter
 	BranchFilter:
@@ -119,6 +127,8 @@ services:
 		class: App\Filters\MemberFilter
 	MemberCountFilter:
 		class: App\FrontModule\Filters\MemberCountFilter
+	MeetingCountFilter:
+		class: App\FrontModule\Filters\MeetingCountFilter
 	MemberDescriptionFilter:
 		class: App\FrontModule\Filters\MemberDescriptionFilter
 	MemberTypeFilter:

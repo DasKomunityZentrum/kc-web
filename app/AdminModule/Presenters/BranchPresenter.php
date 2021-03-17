@@ -24,7 +24,6 @@ use Nette\Utils\ArrayHash;
  */
 class BranchPresenter extends Presenter
 {
-
     /**
      * @var BranchManager $branchManager
      */
@@ -44,12 +43,21 @@ class BranchPresenter extends Presenter
     public function __construct(
         BranchManager $branchManager,
         MemberManager $memberManager
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->branchManager = $branchManager;
         $this->memberManager = $memberManager;
+    }
+
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
     }
 
     public function renderDefault()

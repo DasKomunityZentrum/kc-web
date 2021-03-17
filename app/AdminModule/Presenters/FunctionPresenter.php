@@ -65,6 +65,16 @@ class FunctionPresenter extends Presenter
         $this->member2FunctionFacade = $member2FunctionFacade;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
+
     public function renderDefault()
     {
         $functions = $this->functionManager->getAll();

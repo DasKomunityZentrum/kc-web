@@ -56,6 +56,16 @@ class DepartmentPresenter extends Presenter
         $this->department2Functions2MembersFacade = $department2Functions2MembersFacade;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
+
     public function renderDefault() : void
     {
         $departments = $this->departmentManager->getAll();

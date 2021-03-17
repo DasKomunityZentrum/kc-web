@@ -1,0 +1,21 @@
+{define title}Členi KC a jejich Funkce KC{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Členi KC a jejich Funkce KC</li>
+{/define}
+
+{block content}
+    {foreach $members2Functions as $members2Function}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">{$members2Function|member}</h1>
+
+                <ul class="list-group">
+                    {foreach $members2Function->functions as $function}
+                        <li class="list-group-item list-group-horizontal-sm">{$function|function}</li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    {/foreach}
+{/block}

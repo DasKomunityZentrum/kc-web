@@ -1,15 +1,23 @@
 {define title}Zasedání KC{/define}
 
 {define breadcrumb}
-
+    <li class="breadcrumb-item active" aria-current="page">Zasedání KC</li>
 {/define}
 
 {block content}
     <div class="card mb-1">
         <div class="card-body">
-            <p>Něco o nás? Tak tohle jsme my! Členové velmi vybrané společnosti KC!</p>
-            <p>Kolik zasedání je? Dneska už jich je {$meetingCount|memberCount}!</p>
-            <p>Možná jsme trošku blázni, možná pro někoho budeme působit jako naprostá banda idiotů (a může mít klidně pravdu), ale jsem celkem normální  člobrdíčkové.</p>
+            <p>Velice rádi zasedáme. Máme několik typů zasední. {$types|array}.
+            </p>
+            {if $meetingCount === 0}
+                <p>Kolik zasedání je? Bohužel ještě žádné nemáme...</p>
+            {elseif $meetingCount === 1}
+                <p>Kolik zasedání je? Dneska už máme {$meetingCount|meetingCount}!</p>
+            {elseif $meetingCount < 5}
+                <p>Kolik zasedání je? Dneska už jsou {$meetingCount|meetingCount}!</p>
+            {elseif $meetingCount >= 5}
+                <p>Kolik zasedání je? Dneska už jich je {$meetingCount|meetingCount}!</p>
+            {/if}
         </div>
     </div>
 

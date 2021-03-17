@@ -74,6 +74,16 @@ class MeetingPresenter extends Presenter
         $this->memberManager = $memberManager;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->user->loggedIn) {
+            $this->flashMessage('Nejste přihlášený', 'warning');
+            $this->redirect('Login:default');
+        }
+    }
+
     public function renderDefault()
     {
         $meetings = $this->meetingFacade->getAll();
