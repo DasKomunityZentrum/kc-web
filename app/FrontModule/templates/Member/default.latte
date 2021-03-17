@@ -1,0 +1,38 @@
+{define title}Členi KC{/define}
+
+{define breadcrumb}
+
+{/define}
+
+{block content}
+    <div class="card mb-1">
+        <div class="card-body">
+            <p>Něco o nás? Tak tohle jsme my! Členové velmi vybrané společnosti KC!</p>
+            <p>Kolik nás je? Dneska už nás je {$memberCount|memberCount}!</p>
+            <p>Možná jsme trošku blázni, možná pro někoho budeme působit jako naprostá banda idiotů (a může mít klidně pravdu), ale jsem celkem normální  člobrdíčkové.</p>
+        </div>
+    </div>
+
+    {foreach $memberRows as $members}
+    <div class="card-columns">
+        {foreach $members as $member}
+        <div class="card">
+            <div class="card-header">{$member|member}</div>
+            <div class="card-body">
+                <img src="{$basePath}/{$member|profilePhoto}" class="img-fluid img-thumbnail" alt="{$member|member}" title="{$member|member}"> <br>
+
+                <span>Jsem {$member|gender}</span>
+                <span>a je mi {$member|age}.</span>
+
+                <span>{$member|city}</span>
+                <span>{$member|nick}</span>
+                <span>{$member|active}</span>
+                <span>{$member|memberType}</span>
+                <span>{$member|frontCar}</span>
+                <span>{$member|memberDescription}</span>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+    {/foreach}
+{/block}

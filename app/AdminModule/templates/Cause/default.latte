@@ -1,0 +1,48 @@
+{define title}Kauzy{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Kauzy</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link Cause:edit}" class="btn btn-primary float-right">Přidat kauzu</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pachatel</th>
+            <th>Oddělení KC</th>
+            <th>Jméno</th>
+            <th>Stav</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $causes as $cause}
+            <tr>
+                <td>{$cause->id}</td>
+                <td>
+                    <a href="{link Member:edit, $cause->memberEntity->id}">{$cause->memberEntity|member}</a>
+                </td>
+                <td>
+                    <a href="{link Department:edit, $cause->departmentEntity->id}">{$cause->departmentEntity|department}</a>
+                </td>
+                <td>{$cause->name}</td>
+                <td>
+                    {$presenter::$causeStates[$cause->state]}
+                </td>
+                <td>
+                    <a href="{link Cause:edit, $cause->id}" class="btn btn-primary">Editovat</a>
+                    <a href="{link Cause:delete, $cause->id}" class="btn btn-danger" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{/block}

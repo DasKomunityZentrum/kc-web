@@ -1,0 +1,51 @@
+{define title}Oddělení KC{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item">
+        <a href="{link Department:default}">Oddělení KC</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Oddělení KC</li>
+{/define}
+
+{block content}
+    <div class="card">
+        <div class="card-header">Oddělení KC</div>
+        <div class="card-body">
+            {control departmentForm}
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Funkce KC</div>
+        <div class="card-body">
+            <ul>
+            {foreach $functions as $function}
+                <li>
+                    <a href="{link Function:edit, $function->functionEntity->id}">{$function->functionEntity|function}</a>
+                </li>
+            {/foreach}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Členské Funkce KC</div>
+        <div class="card-body">
+            <ul>
+                {foreach $functions2Members as $function2Member}
+                <li>
+                    <a href="{link Function:edit, $function2Member->id}">{$function2Member|function}</a>
+
+                    <ul>
+                        {foreach $function2Member->members as $member}
+                        <li>
+                            <a href="{link Member:edit, $member->id}">{$member|member}</a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/block}

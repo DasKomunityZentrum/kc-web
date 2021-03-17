@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+
+	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-reboot.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-grid.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap.css">}
+
+	{ifset #style}
+		{include #style}
+	{/ifset}
+</head>
+
+<body>
+	<header>
+		<p>KC - my problémy řešíme</p>
+	</header>
+
+	<nav aria-label="breadcrumb bg-light navbar-light bg-light">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{link Homepage:default}">Root KC</a>
+			</li>
+
+			{ifset #breadcrumb}
+				{include breadcrumb}
+			{else}
+				&nbsp;Drobečková navigace chybí...
+			{/ifset}
+		</ol>
+	</nav>
+
+	{* flashes *}
+	{snippet flashes}
+		{foreach $flashes as $flash}
+			<div class="alert alert-{$flash->type}">{$flash->message}</div>
+		{/foreach}
+	{/snippet}
+	{* flashes *}
+
+	<div class="container-fluid">
+		{include content}
+	</div>
+
+	<footer class="bg-light text-center text-lg-start">
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+			&copy; {php echo date('Y')} Webové oddělení KC
+		</div>
+	</footer>
+
+	{block scripts}
+	<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+	<script src="{$basePath}/node_modules/jquery/dist/jquery.js"></script>
+	<script src="{$basePath}/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+	{/block}
+
+	{ifset #js}
+	{include #js}
+	{/ifset}
+</body>
+</html>

@@ -1,0 +1,133 @@
+parameters:
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+session:
+	expiration: 14 days
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
+services:
+	nette.latteFactory:
+		setup:
+			- addFilter(active, @App\FrontModule\Filters\ActiveFilter)
+			- addFilter(age, @App\FrontModule\Filters\AgeFilter)
+			- addFilter(bool, @App\Filters\BoolFilter)
+			- addFilter(branch, @App\AdminModule\Filters\BranchFilter)
+			- addFilter(city, @App\FrontModule\Filters\CityFilter)
+			- addFilter(frontCar, @App\FrontModule\Filters\CarFilter)
+			- addFilter(adminCar, @App\AdminModule\Filters\CarFilter)
+			- addFilter(cause, @App\AdminModule\Filters\CauseFilter)
+			- addFilter(department, @App\AdminModule\Filters\DepartmentFilter)
+			- addFilter(departmentDescription, @App\FrontModule\Filters\DepartmentDescriptionFilter)
+			- addFilter(function, @App\AdminModule\Filters\FunctionFilter)
+			- addFilter(gender, @App\FrontModule\Filters\GenderFilter)
+			- addFilter(adminMeeting, @App\AdminModule\Filters\MeetingFilter)
+			- addFilter(frontMeeting, @App\FrontModule\Filters\MeetingFilter)
+			- addFilter(member, @App\Filters\MemberFilter)
+			- addFilter(memberCount, @App\FrontModule\Filters\MemberCountFilter)
+			- addFilter(memberDescription, @App\FrontModule\Filters\MemberDescriptionFilter)
+			- addFilter(memberType, @App\FrontModule\Filters\MemberTypeFilter)
+			- addFilter(nick, @App\FrontModule\Filters\NickFilter)
+			- addFilter(profilePhoto, @App\Filters\ProfilePhotoFilter)
+
+	Router: App\Router\RouterFactory::createRouter
+
+# managers
+	BranchManager:
+		class: App\Model\Managers\BranchManager
+	CarManager:
+		class: App\Model\Managers\CarManager
+	CauseManager:
+		class: App\Model\Managers\CauseManager
+	DepartmentManager:
+		class: App\Model\Managers\DepartmentManager
+	Department2Function2MemberManager:
+		class: App\Model\Managers\Department2Function2MemberManager
+	Department2FunctionManager:
+		class: App\Model\Managers\Department2FunctionManager
+	FunctionManager:
+		class: App\Model\Managers\FunctionManager
+	MeetingManager:
+		class: App\Model\Managers\MeetingManager
+	MemberManager:
+	 	class: App\Model\Managers\MemberManager
+	Member2FunctionManager:
+		class: App\Model\Managers\Member2FunctionManager
+	Member2MeetingManager:
+		class: App\Model\Managers\Member2MeetingManager
+
+# facades
+	MemberFacade:
+		class: App\Model\Facades\MemberFacade
+	Member2FunctionFacade:
+		class: App\Model\Facades\Member2FunctionFacade
+	Member2MeetingFacade:
+		class: App\Model\Facades\Member2MeetingFacade
+	CauseFacade:
+		class: App\Model\Facades\CauseFacade
+	Department2FunctionFacade:
+		class: App\Model\Facades\Department2FunctionFacade
+	Department2Functions2MembersFacade:
+		class: App\Model\Facades\Department2Functions2MembersFacade
+	Departments2Functions2MembersFacade:
+		class: App\Model\Facades\Departments2Functions2MembersFacade
+	Member2Departments2FunctionsFacade:
+		class: App\Model\Facades\Member2Departments2FunctionsFacade
+	MeetingFacade:
+		class: App\Model\Facades\MeetingFacade
+
+# filters
+	ActiveFilter:
+		class: App\FrontModule\Filters\ActiveFilter
+	AgeFilter:
+		class: App\FrontModule\Filters\AgeFilter
+	BoolFilter:
+		class: App\Filters\BoolFilter
+	BranchFilter:
+		class: App\AdminModule\Filters\BranchFilter
+	CityFilter:
+		class: App\FrontModule\Filters\CityFilter
+	AdminCarFilter:
+		class: App\AdminModule\Filters\CarFilter
+	FrontCarFilter:
+		class: App\FrontModule\Filters\CarFilter
+	CauseFilter:
+		class: App\AdminModule\Filters\CauseFilter
+	DepartmentFilter:
+		class: App\AdminModule\Filters\DepartmentFilter
+	DepartmentDescriptionFilter:
+		class: App\FrontModule\Filters\DepartmentDescriptionFilter
+	FunctionFilter:
+		class: App\AdminModule\Filters\FunctionFilter
+	GenderFilter:
+		class: App\FrontModule\Filters\GenderFilter
+	AdminMeetingFilter:
+		class: App\AdminModule\Filters\MeetingFilter
+	FrontMeetingFilter:
+		class: App\FrontModule\Filters\MeetingFilter
+	MemberFilter:
+		class: App\Filters\MemberFilter
+	MemberCountFilter:
+		class: App\FrontModule\Filters\MemberCountFilter
+	MemberDescriptionFilter:
+		class: App\FrontModule\Filters\MemberDescriptionFilter
+	MemberTypeFilter:
+		class: App\FrontModule\Filters\MemberTypeFilter
+	NickFilter:
+		class: App\FrontModule\Filters\NickFilter
+	ProfilePhotoFilter:
+		class: App\Filters\ProfilePhotoFilter
+
+# services
+	ProfilePhotoService:
+		factory: App\Services\ProfilePhotoService(%wwwDir%)

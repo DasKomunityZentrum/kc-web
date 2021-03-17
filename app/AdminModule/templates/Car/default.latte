@@ -1,0 +1,46 @@
+{define title}Auta{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Auta</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link Car:edit}" class="btn btn-primary float-right">Přidat auto</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Je aktivní?</th>
+            <th>Přezdívka</th>
+            <th>Objem</th>
+            <th>KW</th>
+            <th>Poznámka</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $cars as $car}
+            <tr>
+                <td>{$car->id}</td>
+                <td>{$car->name}</td>
+                <td>{$car->active|bool}</td>
+                <td>{$car->nick}</td>
+                <td>{$car->ccc}</td>
+                <td>{$car->kw}</td>
+                <td>{$car->note}</td>
+                <td>
+                    <a href="{link Car:edit, $car->id}" class="btn btn-primary">Editovat</a>
+                    <a href="{link Car:delete, $car->id}" class="btn btn-danger" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{/block}

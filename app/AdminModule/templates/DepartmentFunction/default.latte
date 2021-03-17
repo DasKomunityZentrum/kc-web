@@ -1,0 +1,39 @@
+{define title}Funkce Oddělení KC{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Funkce Oddělení KC</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link DepartmentFunction:edit}" class="btn btn-primary">Přidat Funkci Oddělení KC</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Oddělení KC</th>
+            <th>Funkce KC</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $relations as $relation}
+            <tr>
+                <td>
+                    <a href="{link Department:edit, $relation->departmentEntity->id}">{$relation->departmentEntity|department}</a>
+                </td>
+                <td>
+                    <a href="{link Function:edit, $relation->functionEntity->id}">{$relation->functionEntity|function}
+                </td>
+                <td>
+                    <a href="{link DepartmentFunction:edit, $relation->departmentEntity->id, $relation->functionEntity->id}" class="btn btn-primary">Editovat</a>
+                    <a href="{link DepartmentFunction:delete, $relation->departmentEntity->id, $relation->functionEntity->id}" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{/block}

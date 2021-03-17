@@ -1,0 +1,48 @@
+{define title}Oddělení KC{/define}
+
+{define breadcrumb}
+{/define}
+
+{define style}
+    <style>
+        .tooltip-inner {
+            min-width: 300px; /* the minimum width */
+        }
+    </style>
+{/define}
+
+{define js}
+<script>$(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+{/define}
+
+{block content}
+    {foreach $departments as $department}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">{$department|department}</h1>
+            <p class="lead">{$department|departmentDescription}</p>
+
+            <ul class="list-group-md list-group-flush">
+                {foreach $department->functions as $function}
+                <li class="list-group-item list-group-horizontal">
+                    {if $function->description}
+                    <p><abbr data-toggle="tooltip" title="{$function->description}">{$function|function}</abbr></p>
+                    {else}
+                    <p>{$function|function}</p>
+                    {/if}
+
+                    <ul class="list-group list-group-flush">
+                    {foreach $function->members as $member}
+                        <li class="list-group-item" data-toggle="tooltip" data-html="true" title='<img src="/{$member|profilePhoto}">'>{$member|member}</li>
+                    {/foreach}
+                    </ul>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    {/foreach}
+{/block}

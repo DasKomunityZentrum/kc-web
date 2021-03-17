@@ -1,0 +1,30 @@
+{define title}Zasedání KC{/define}
+
+{define breadcrumb}
+
+{/define}
+
+{block content}
+    <div class="card mb-1">
+        <div class="card-body">
+            <p>Něco o nás? Tak tohle jsme my! Členové velmi vybrané společnosti KC!</p>
+            <p>Kolik zasedání je? Dneska už jich je {$meetingCount|memberCount}!</p>
+            <p>Možná jsme trošku blázni, možná pro někoho budeme působit jako naprostá banda idiotů (a může mít klidně pravdu), ale jsem celkem normální  člobrdíčkové.</p>
+        </div>
+    </div>
+
+    {foreach $meetings as $meeting}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">{$meeting|frontMeeting}</h1>
+                <p class="lead">{$meeting->description}</p>
+
+                <ul class="list-group">
+                    {foreach $meeting->members as $member}
+                        <li class="list-group-item list-group-horizontal-sm">{$member|member}</li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    {/foreach}
+{/block}

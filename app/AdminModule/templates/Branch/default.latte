@@ -1,0 +1,38 @@
+{define title}Pobočky KC{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Pobočky KC</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link Branch:edit}" class="btn btn-primary float-right">Přidat Pobočku KC</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Obec</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $branches as $branch}
+            <tr>
+                <td>{$branch->id}</td>
+                <td>{$branch->name}</td>
+                <td>{$branch->city}</td>
+                <td>
+                    <a href="{link Branch:edit, $branch->id}" class="btn btn-primary">Editovat</a>
+                    <a href="{link Branch:delete, $branch->id}" class="btn btn-danger" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{/block}

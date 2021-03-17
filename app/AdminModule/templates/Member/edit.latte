@@ -1,0 +1,85 @@
+{define title}Člen KC{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item">
+        <a href="{link Member:default}">Členi KC</a>
+    </li>
+     <li class="breadcrumb-item active" aria-current="page">Člen KC</li>
+{/define}
+
+{block content}
+    <div class="card">
+        <div class="card-header">Člen KC</div>
+        <div class="card-body">{control memberForm}</div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Profilová fotografie</div>
+        <div class="card-body">
+            {if $presenter->getParameter('id') && $member->profilePhoto && $member->profilePhotoExtension}
+            <img src="{$basePath}/{$member|profilePhoto}" alt="{$member|member}" title="{$member|member}">
+            <br><a href="{link Member:deleteProfilePhoto, $member->id}">Smazat profilovou fotografii</a>
+            {/if}
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Funkce KC</div>
+        <div class="card-body">
+            <ul>
+            {foreach $functions as $function}
+                <li>
+                    <a href="{link Function:edit, $function->functionEntity->id}">{$function->functionEntity|function}</a>
+                </li>
+            {/foreach}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Funkce Oddělení KC</div>
+        <div class="card-body">
+            <ul>
+            {foreach $departments2Functions as $department}
+                <li>
+                    <a href="{link Department:edit, $department->id}">{$department|department}</a>
+
+                    <ul>
+                        {foreach $department->functions as $function}
+                            <li>
+                                <a href="{link Function:edit, $function->id}">{$function|function}</a>
+                            </li>
+                        {/foreach}
+                    </ul>
+                </li>
+            {/foreach}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Kauzy KC</div>
+        <div class="card-body">
+            <ul>
+                {foreach $causes as $cause}
+                    <li>
+                        <a href="{link Cause:edit, $cause->id}">{$cause|cause}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-1">
+        <div class="card-header">Zasedání KC</div>
+        <div class="card-body">
+            <ul>
+                {foreach $meetings as $meeting}
+                    <li>
+                        <a href="{link Meeting:edit, $meeting->meetingId}">{$meeting->meetingEntity|adminMeeting}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/block}

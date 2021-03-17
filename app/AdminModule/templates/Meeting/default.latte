@@ -1,0 +1,49 @@
+{define title}Zasedání{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Zasedání</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link Meeting:edit}" class="btn btn-primary">Přidat zasedání</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Datum</th>
+            <th>Jméno</th>
+            <th>Je pravidelné?</th>
+            <th>Přítomní členi</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $meetings as $meeting}
+            <tr>
+                <td>{$meeting->id}</td>
+                <td>{$meeting->date|date: "d.m.Y"}</td>
+                <td>{$meeting->name}</td>
+                <td>
+                    {$meeting->isRegular|bool}
+                </td>
+                <td>
+                    {foreach $meeting->members as $member}
+                        <a href="{link Member:edit, $member->id}">{$member|member}</a>
+                    {/foreach}
+                </td>
+                <td>
+                    <a href="{link Meeting:edit, $meeting->id}" class="btn btn-primary">Editovat</a>
+                    <a href="{link Meeting:delete, $meeting->id}" class="btn btn-danger">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+
+{/block}

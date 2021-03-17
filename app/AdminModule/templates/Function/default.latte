@@ -1,0 +1,38 @@
+{define title}Funkce{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item active" aria-current="page">Funkce</li>
+{/define}
+
+{block content}
+    <div class="d-flex">
+        <div class="ml-auto p-2">
+            <a href="{link Function:edit}" class="btn btn-primary">Přidat funkci</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Jméno</th>
+                <th>Typ</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {foreach $functions as $function}
+                <tr>
+                    <td>{$function->id}</td>
+                    <td>{$function->name}</td>
+                    <td>{$presenter::$functionTypes[$function->type]}</td>
+                    <td>
+                        <a href="{link Function:edit, $function->id}" class="btn btn-primary">Editovat</a>
+                        <a href="{link Function:delete, $function->id}" class="btn btn-danger">Smazat</a>
+                    </td>
+                </tr>
+            {/foreach}
+        </tbody>
+    </table>
+{/block}

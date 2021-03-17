@@ -1,0 +1,9 @@
+config/local.neon
+config/production.neon
+vendor
+temp
+log
+.idea
+www/node_modules
+www/images
+www/images/profile_photos

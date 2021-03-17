@@ -1,0 +1,19 @@
+{define title}Kauzy KC{/define}
+
+{define breadcrumb}
+{/define}
+
+{block content}
+    {foreach $causes as $cause}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-5">{$cause|cause}</h1>
+                <h2 class="lead">Spáchal {$cause->memberEntity|member}</h2>
+                <h2 class="lead">Šetří {$cause->departmentEntity|department}</h2>
+                <hr>
+                <p class="lead">{$cause->description}</p>
+                <p class="lead">{$cause->conclusion}</p>
+            </div>
+        </div>
+    {/foreach}
+{/block}

@@ -1,0 +1,32 @@
+{define title}Zasedání{/define}
+
+{define breadcrumb}
+    <li class="breadcrumb-item">
+        <a href="{link Meeting:default}">Zasedání</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Zasedání</li>
+{/define}
+
+{block content}
+    <div class="card">
+        <div class="card-header">Zasedání</div>
+        <div class="card-body">
+            {control meetingForm}
+        </div>
+    </div>
+
+    {*
+    <div class="card mt-1">
+        <div class="card-header">Členi</div>
+        <div class="card-body">
+            <ul>
+                {foreach $members as $member}
+                    <li>
+                        <a href="{link Member:edit, $member->memberEntity->id}">{$member->memberEntity|member}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    *}
+{/block}
