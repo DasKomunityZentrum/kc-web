@@ -10,13 +10,31 @@
 
 namespace App\Form;
 
+use Nette\Utils\Html;
+
+/**
+ * Class KcCheckbox
+ *
+ * @package App\Form
+ */
 class KcCheckbox extends \Nette\Forms\Controls\Checkbox
 {
+    /**
+     * KcCheckbox constructor.
+     *
+     * @param string|null $name
+     * @param string|null $caption
+     */
     public function __construct($name = null, $caption = null)
     {
         parent::__construct($caption);
     }
 
+    /**
+     * @param string|null $caption
+     *
+     * @return Html|null
+     */
     public function getLabel($caption = null)
     {
         return $this->getLabelPart();

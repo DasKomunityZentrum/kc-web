@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\Department2FunctionFacade;
 use App\Model\Facades\Department2Functions2MembersFacade;
 use App\Model\Managers\DepartmentManager;
@@ -116,7 +116,7 @@ class DepartmentPresenter extends Presenter
      */
     public function createComponentDepartmentForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno');
         $form->addTextArea('description', 'Popis');

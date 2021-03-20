@@ -20,7 +20,6 @@ use Nette\Application\UI\Presenter;
  */
 class DepartmentPresenter extends Presenter
 {
-
     /**
      * @var Department2Functions2MembersFacade $department2Function2MemberFacade
      */

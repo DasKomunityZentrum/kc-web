@@ -10,15 +10,25 @@
 
 namespace App\Form;
 
-
+use Nette\Forms\Control;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Rendering\DefaultFormRenderer;
 use Nette\HtmlStringable;
 use Nette\Utils\Html;
 
+/**
+ * Class KcFormRenderer
+ *
+ * @package App\Form
+ */
 class KcFormRenderer extends DefaultFormRenderer
 {
-    public function renderControl(\Nette\Forms\Control $control) : Html
+    /**
+     * @param Control $control
+     *
+     * @return Html
+     */
+    public function renderControl(Control $control) : Html
     {
         $body = $this->getWrapper('control container');
         if ($this->counter % 2) {

@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\MeetingFacade;
 use App\Model\Managers\MeetingManager;
 use App\Model\Managers\Member2MeetingManager;
@@ -127,7 +127,7 @@ class MeetingPresenter extends Presenter
 
     public function createComponentMeetingForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno');
         $form->addTextArea('description', 'Popis');

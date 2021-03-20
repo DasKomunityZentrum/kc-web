@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\Department2FunctionFacade;
 use App\Model\Managers\Department2FunctionManager;
 use App\Model\Managers\DepartmentManager;
@@ -131,7 +131,7 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
 
     public function createComponentDepartmentFunctionForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addSelect('departmentId', 'Oddělení KC')
             ->setPrompt('Vyberte oddělení KC');

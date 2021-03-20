@@ -11,8 +11,7 @@
 namespace App\AdminModule\Presenters;
 
 use App\Filters\FunctionFilter;
-use App\Filters\MemberFilter;
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\Member2FunctionFacade;
 use App\Model\Managers\FunctionManager;
 use App\Model\Managers\Member2FunctionManager;
@@ -121,7 +120,7 @@ class MemberFunctionPresenter extends Presenter
 
     public function createComponentMemberFunctionForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addSelect('memberId', 'Člen KC')
             ->setPrompt('Vyberte člena');

@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Form\KcFormRenderer;
 use App\Model\Managers\CarManager;
 use App\Model\Managers\MemberManager;
@@ -92,9 +92,7 @@ class CarPresenter extends Presenter
             $members = [];
         }
 
-
         $this->template->members = $members;
-
     }
 
     /**
@@ -112,7 +110,7 @@ class CarPresenter extends Presenter
      */
     public function createComponentCarForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno');
         $form->addCheckbox('active', 'Aktivní');

@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Managers\BranchManager;
 use App\Model\Managers\MemberManager;
 use Nette\Application\UI\Form;
@@ -103,7 +103,7 @@ class BranchPresenter extends Presenter
      */
     public function createComponentBranchForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno');
         $form->addText('city', 'Obec');

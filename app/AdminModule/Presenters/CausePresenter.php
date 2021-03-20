@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\CauseFacade;
 use App\Model\Managers\CauseManager;
 use App\Model\Managers\DepartmentManager;
@@ -61,6 +61,7 @@ class CausePresenter extends Presenter
      *
      * @param CauseManager $causeManager
      * @param CauseFacade $causeFacade
+     * @param DepartmentManager $departmentManager
      * @param MemberManager $memberManager
      */
     public function __construct(
@@ -127,7 +128,7 @@ class CausePresenter extends Presenter
 
     public function createComponentCauseForm(): Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addTextArea('name', 'Jméno');
         $form->addSelect('memberId', 'Pachatel')

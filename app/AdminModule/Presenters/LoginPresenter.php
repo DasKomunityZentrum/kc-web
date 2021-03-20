@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\ArrayHash;
@@ -37,11 +37,11 @@ class LoginPresenter extends Presenter
     }
 
     /**
-     * @return KCForm
+     * @return KcForm
      */
-    public function createComponentLoginForm() : KCForm
+    public function createComponentLoginForm() : KcForm
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('username', 'Jméno');
         $form->addPassword('password', 'Heslo');

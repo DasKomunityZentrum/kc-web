@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\Department2FunctionFacade;
 use App\Model\Facades\Member2FunctionFacade;
 use App\Model\Managers\FunctionManager;
@@ -111,7 +111,6 @@ class FunctionPresenter extends Presenter
             $departments = [];
         }
 
-
         $this->template->members = $members;
         $this->template->departments = $departments;
     }
@@ -125,7 +124,7 @@ class FunctionPresenter extends Presenter
 
     public function createComponentFunctionForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno')
             ->setRequired('Jméno je povinné');

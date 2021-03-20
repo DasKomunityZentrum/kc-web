@@ -10,7 +10,7 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Form\KCForm;
+use App\Form\KcForm;
 use App\Model\Facades\Member2Departments2FunctionsFacade;
 use App\Model\Facades\Member2FunctionFacade;
 use App\Model\Facades\Member2MeetingFacade;
@@ -188,7 +188,7 @@ class MemberPresenter extends Presenter
             $causes = $this->causeManager->getByMemberId($id);
             $meetings = $this->member2MeetingFacade->getByLeftId($id);
             $member = $this->memberManager->getByPrimaryKey($id);
-            $departments2Functions = $this->member2Departments2FunctionsFacade->getByMemberId($id);
+            $departments2Functions = $this->member2Departments2FunctionsFacade->getByMemberId($id)->departments;
         } else {
             $functions = [];
             $causes = [];
@@ -201,7 +201,7 @@ class MemberPresenter extends Presenter
         $this->template->causes = $causes;
         $this->template->meetings = $meetings;
         $this->template->member = $member;
-        $this->template->departments2Functions = $departments2Functions->departments;
+        $this->template->departments2Functions = $departments2Functions;
         $this->template->photoDir = $this->profilePhotoService->getRelativeDir();
     }
 
@@ -251,7 +251,7 @@ class MemberPresenter extends Presenter
      */
     public function createComponentMemberForm() : Form
     {
-        $form = new KCForm();
+        $form = new KcForm();
 
         $form->addText('name', 'Jméno')
             ->setRequired('Jméno je povinné');
