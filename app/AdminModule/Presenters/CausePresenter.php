@@ -93,6 +93,7 @@ class CausePresenter extends Presenter
         $causes = $this->causeFacade->getAll();
 
         $this->template->causes = $causes;
+        $this->template->causeCount = count($causes);
     }
 
     public function actionEdit(int $id = null)

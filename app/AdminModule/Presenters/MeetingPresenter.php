@@ -89,6 +89,7 @@ class MeetingPresenter extends Presenter
         $meetings = $this->meetingFacade->getAll();
 
         $this->template->meetings = $meetings;
+        $this->template->meetingCount = count($meetings);
     }
 
     public function actionEdit(int $id = null)

@@ -84,6 +84,7 @@ class MemberFunctionPresenter extends Presenter
         $relations = $this->member2FunctionFacade->getAll();
 
         $this->template->relations = $relations;
+        $this->template->memberFunctionCount = count($relations);
     }
 
     public function actionEdit(int $memberId = null, int $functionId = null)

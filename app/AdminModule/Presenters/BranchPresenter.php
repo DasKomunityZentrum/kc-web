@@ -65,6 +65,7 @@ class BranchPresenter extends Presenter
         $branches = $this->branchManager->getAll();
 
         $this->template->branches = $branches;
+        $this->template->branchCount = count($branches);
     }
 
     public function actionEdit(int $id = null)

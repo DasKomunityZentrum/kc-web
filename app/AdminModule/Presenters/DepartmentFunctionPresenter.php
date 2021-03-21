@@ -91,6 +91,7 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         $relations = $this->department2FunctionFacade->getAll();
 
         $this->template->relations = $relations;
+        $this->template->departmentFunctionCount = count($relations);
     }
 
     public function actionEdit(int $departmentId = null, int $functionId = null)

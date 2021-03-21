@@ -157,6 +157,7 @@ class MemberPresenter extends Presenter
         $members = $this->memberFacade->getAll();
 
         $this->template->members = $members;
+        $this->template->memberCount = count($members);
     }
 
     /**

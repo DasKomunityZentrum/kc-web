@@ -6,6 +6,9 @@
 
 {block content}
     <div class="d-flex">
+        <div class="mr-auto p-2">
+            {$meetingCount|meetingCount}
+        </div>
         <div class="ml-auto p-2">
             <a href="{link Meeting:edit}" class="btn btn-primary">Přidat zasedání</a>
         </div>

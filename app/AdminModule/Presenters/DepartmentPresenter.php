@@ -71,6 +71,7 @@ class DepartmentPresenter extends Presenter
         $departments = $this->departmentManager->getAll();
 
         $this->template->departments = $departments;
+        $this->template->departmentCount = count($departments);
     }
 
     public function actionEdit(int $id = null)

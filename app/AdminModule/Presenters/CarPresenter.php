@@ -66,6 +66,7 @@ class CarPresenter extends Presenter
         $cars = $this->carManager->getAll();
 
         $this->template->cars = $cars;
+        $this->template->carCount = count($cars);
     }
 
     /**

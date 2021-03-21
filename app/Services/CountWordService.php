@@ -2,50 +2,27 @@
 /**
  *
  * Created by PhpStorm.
- * Filename: MeetingCountFilter.php
+ * Filename: CountWordService.php
  * User: Tomáš Babický
- * Date: 17.03.2021
- * Time: 23:11
+ * Date: 21.03.2021
+ * Time: 14:29
  */
 
-namespace App\FrontModule\Filters;
+namespace App\Services;
 
 /**
- * Class MeetingCountFilter
+ * Class CountWordService
  *
- * @package App\FrontModule\Filters
+ * @package App\Services
  */
-class MeetingCountFilter
+abstract class CountWordService
 {
     /**
      * @param int $count
      *
      * @return string
      */
-    public function fromZeroToTen(int $count) : string
-    {
-        if ($count === 1) {
-            return 'jedno';
-        } elseif ($count === 2) {
-            return 'dvě';
-        } elseif ($count === 3) {
-            return 'tři';
-        } elseif ($count === 4) {
-            return 'čtyři';
-        } elseif ($count === 5) {
-            return 'pět';
-        } elseif ($count === 6) {
-            return 'šest';
-        } elseif ($count === 7) {
-            return 'sedm';
-        } elseif ($count === 8) {
-            return 'osm';
-        } elseif ($count === 9) {
-            return 'devět';
-        } elseif ($count === 10) {
-            return 'deset';
-        }
-    }
+    abstract public function fromZeroToTen(int $count) : string;
 
     /**
      * @param int $count
@@ -108,7 +85,7 @@ class MeetingCountFilter
      *
      * @return string
      */
-    public function __invoke(int $count) : string
+    public function parse(int $count) : string
     {
         if ($count > 0 && $count <= 10) {
             return $this->fromZeroToTen($count);

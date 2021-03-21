@@ -80,6 +80,7 @@ class FunctionPresenter extends Presenter
         $functions = $this->functionManager->getAll();
 
         $this->template->functions = $functions;
+        $this->template->functionCount = count($functions);
     }
 
     /**

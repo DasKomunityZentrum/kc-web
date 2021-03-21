@@ -7,17 +7,8 @@
 {block content}
     <div class="card mb-1">
         <div class="card-body">
-            <p>Velice rádi zasedáme. Máme několik typů zasední. {$types|array}.
-            </p>
-            {if $meetingCount === 0}
-                <p>Kolik zasedání je? Bohužel ještě žádné nemáme...</p>
-            {elseif $meetingCount === 1}
-                <p>Kolik zasedání je? Dneska už máme {$meetingCount|meetingCount}!</p>
-            {elseif $meetingCount < 5}
-                <p>Kolik zasedání je? Dneska už jsou {$meetingCount|meetingCount}!</p>
-            {elseif $meetingCount >= 5}
-                <p>Kolik zasedání je? Dneska už jich je {$meetingCount|meetingCount}!</p>
-            {/if}
+            <p>Velice rádi zasedáme. Máme několik typů zasední. {$types|array}.</p>
+            <p>{$meetingCount|meetingCountFilter}</p>
         </div>
     </div>
 

@@ -101,6 +101,7 @@ class DepartmentFunctionMemberPresenter extends \Nette\Application\UI\Presenter
         $relations = $this->departments2Functions2MembersFacade->getAll();
 
         $this->template->relations = $relations;
+        $this->template->departmentFunctionMemberCount = count($relations);
     }
 
     public function actionEdit(int $departmentId = null, int $functionId = null, int $memberId = null)

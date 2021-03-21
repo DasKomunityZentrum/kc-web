@@ -19,6 +19,18 @@ extensions:
 services:
 	nette.latteFactory:
 		setup:
+			- addFilter(branchCount, @App\Filters\Count\BranchCountFilter)
+			- addFilter(carCount, @App\Filters\Count\CarCountFilter)
+			- addFilter(causeCount, @App\Filters\Count\CauseCountFilter)
+			- addFilter(departmentCount, @App\Filters\Count\DepartmentCountFilter)
+			- addFilter(departmentFunctionCount, @App\Filters\Count\DepartmentFunctionCountFilter)
+			- addFilter(departmentFunctionMemberCount, @App\Filters\Count\DepartmentFunctionMemberCountFilter)
+			- addFilter(departmentCount, @App\Filters\Count\DepartmentCountFilter)
+			- addFilter(functionCount, @App\Filters\Count\FunctionCountFilter)
+			- addFilter(meetingCount, @App\Filters\Count\MeetingCountFilter)
+			- addFilter(memberCount, @App\Filters\Count\MemberCountFilter)
+			- addFilter(memberFunctionCount, @App\Filters\Count\MemberFunctionCountFilter)
+
 			- addFilter(active, @App\FrontModule\Filters\ActiveFilter)
 			- addFilter(age, @App\FrontModule\Filters\AgeFilter)
 			- addFilter(array, @App\Filters\ArrayFilter)
@@ -34,9 +46,7 @@ services:
 			- addFilter(gender, @App\FrontModule\Filters\GenderFilter)
 			- addFilter(adminMeeting, @App\AdminModule\Filters\MeetingFilter)
 			- addFilter(frontMeeting, @App\FrontModule\Filters\MeetingFilter)
-			- addFilter(meetingCount, @App\FrontModule\Filters\MeetingCountFilter)
 			- addFilter(member, @App\Filters\MemberFilter)
-			- addFilter(memberCount, @App\FrontModule\Filters\MemberCountFilter)
 			- addFilter(memberDescription, @App\FrontModule\Filters\MemberDescriptionFilter)
 			- addFilter(memberType, @App\FrontModule\Filters\MemberTypeFilter)
 			- addFilter(nick, @App\FrontModule\Filters\NickFilter)
@@ -93,6 +103,27 @@ services:
 		class: App\Model\Facades\MeetingFacade
 
 # filters
+	BranchCountFilter:
+		class: App\Filters\Count\BranchCountFilter
+	CarCountFilter:
+		class: App\Filters\Count\CarCountFilter
+	CauseCountFilter:
+		class: App\Filters\Count\CauseCountFilter
+	DepartmentCountFilter:
+		class: App\Filters\Count\DepartmentCountFilter
+	DepartmentFunctionCountFilter:
+		class: App\Filters\Count\DepartmentFunctionCountFilter
+	DepartmentFunctionMemberCountFilter:
+		class: App\Filters\Count\DepartmentFunctionMemberCountFilter
+	FunctionCountFilter:
+		class: App\Filters\Count\FunctionCountFilter
+	MeetingCountFilter:
+		class: App\Filters\Count\MeetingCountFilter
+	MemberCountFilter:
+		class: App\Filters\Count\MemberCountFilter
+	MemberFunctionCountFilter:
+		class: App\Filters\Count\MemberFunctionCountFilter
+
 	ActiveFilter:
 		class: App\FrontModule\Filters\ActiveFilter
 	AgeFilter:
@@ -125,10 +156,6 @@ services:
 		class: App\FrontModule\Filters\MeetingFilter
 	MemberFilter:
 		class: App\Filters\MemberFilter
-	MemberCountFilter:
-		class: App\FrontModule\Filters\MemberCountFilter
-	MeetingCountFilter:
-		class: App\FrontModule\Filters\MeetingCountFilter
 	MemberDescriptionFilter:
 		class: App\FrontModule\Filters\MemberDescriptionFilter
 	MemberTypeFilter:
@@ -141,3 +168,10 @@ services:
 # services
 	ProfilePhotoService:
 		factory: App\Services\ProfilePhotoService(%wwwDir%)
+
+	CountWordHeService:
+		class: App\Services\CountWordHeService
+	CountWordSheService:
+		class: App\Services\CountWordSheService
+	CountWordItService:
+		class: App\Services\CountWordItService
