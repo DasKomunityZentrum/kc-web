@@ -4,6 +4,13 @@
     <li class="breadcrumb-item active" aria-current="page">Členi KC a jejich Funkce KC</li>
 {/define}
 
+{define js}
+<script>$(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+{/define}
+
 {block content}
     {foreach $members2Functions as $members2Function}
         <div class="jumbotron jumbotron-fluid">
@@ -12,7 +19,13 @@
 
                 <ul class="list-group">
                     {foreach $members2Function->functions as $function}
-                        <li class="list-group-item list-group-horizontal-sm">{$function|function}</li>
+                        <li class="list-group-item list-group-horizontal-sm">
+                            {if $function->description}
+                            <abbr data-toggle="tooltip" title="{$function->description}">{$function|function}</abbr>
+                            {else}
+                            {$function|function}
+                            {/if}
+                        </li>
                     {/foreach}
                 </ul>
             </div>

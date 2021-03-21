@@ -4,11 +4,24 @@
     <li class="breadcrumb-item active" aria-current="page">Funkce KC a jejich Členi KC</li>
 {/define}
 
+{define js}
+<script>$(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+{/define}
+
 {block content}
     {foreach $functions2Members as $functions2Member}
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">{$functions2Member|function}</h1>
+                <h1 class="display-4">
+                {if $functions2Member->description}
+                <abbr data-toggle="tooltip" title="{$functions2Member->description}">{$functions2Member|function}</abbr>
+                {else}
+                {$functions2Member|function}
+                {/if}
+                </h1>
 
                 <ul class="list-group">
                     {foreach $functions2Member->members as $member}
