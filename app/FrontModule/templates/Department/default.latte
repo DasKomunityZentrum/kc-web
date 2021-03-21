@@ -30,9 +30,9 @@
                 {foreach $department->functions as $function}
                 <li class="list-group-item list-group-horizontal">
                     {if $function->description}
-                    <p><abbr data-toggle="tooltip" title="{$function->description}">{$function|function}</abbr></p>
+                    <strong><abbr data-toggle="tooltip" title="{$function->description}">{$function|function}</abbr></strong>
                     {else}
-                    <p>{$function|function}</p>
+                    <strong>{$function|function}</strong>
                     {/if}
 
                     <ul class="list-group list-group-flush">
