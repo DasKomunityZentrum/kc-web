@@ -1,0 +1,11 @@
+dibi:
+	host: localhost
+	username: root
+	password: ""
+	database: kc
+	lazy: true
+
+security:
+	users:
+		# jméno: heslo
+		Username: P@sawdésw45ord@@€fa15h
