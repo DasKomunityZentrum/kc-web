@@ -29,7 +29,14 @@ class Bootstrap
 			->register();
 
 		$configurator->addConfig($appDir . '/config/common.neon');
-		$configurator->addConfig($appDir . '/config/local.neon');
+
+		if (file_exists($appDir . '/config/local.neon')){
+            $configurator->addConfig($appDir . '/config/local.neon');
+        }
+
+        if (file_exists($appDir . '/config/production.neon')){
+            $configurator->addConfig($appDir . '/config/production.neon');
+        }
 
 		return $configurator;
 	}
