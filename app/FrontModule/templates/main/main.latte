@@ -1,0 +1,17 @@
+{extends '../@layout.latte'}
+
+{block header}
+    {block customHeader}
+        {include 'header.latte'}
+    {/block}
+    {include 'mainmenu.latte'}
+    {include 'breadcrumb.latte'}
+    {include 'flashes.latte'}
+{/block}
+
+
+{block content}{/block}
+
+{block footer}
+    {include 'footer.latte'}
+{/block}

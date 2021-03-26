@@ -1,0 +1,7 @@
+{* flashes *}
+{snippet flashes}
+    {foreach $flashes as $flash}
+        <div class="alert alert-{$flash->type}">{$flash->message}</div>
+    {/foreach}
+{/snippet}
+{* flashes *}

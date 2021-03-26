@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item {if $presenter->getName() === 'Member'}active{/if}">
+                <a class="nav-link" href="{link Member:default}">Členi KC</a>
+            </li>
+
+            <li class="nav-item {if $presenter->getName() === 'Function'}active{/if}">
+                <a class="nav-link" href="{link FunctionMember:default}">Funkce KC a jejich Členi KC</a>
+            </li>
+
+            <li class="nav-item {if $presenter->getName() === 'MemberFunction'}active{/if}">
+                <a class="nav-link" href="{link MemberFunction:default}">Členi KC a jejich Funkce KC</a>
+            </li>
+
+            <li class="nav-item {if $presenter->getName() === 'Department'}active{/if}">
+                <a class="nav-link" href="{link Department:default}">Oddělení KC</a>
+            </li>
+
+            <li class="nav-item {if $presenter->getName() === 'Meeting'}active{/if}">
+                <a class="nav-link" href="{link Meeting:default}">Zasedání KC</a>
+            </li>
+
+            <li class="nav-item {if $presenter->getName() === 'Cause'}active{/if}">
+                <a class="nav-link" href="{link Cause:default}">Kauzy KC</a>
+            </li>
+
+            {*
+            <li class="nav-item active">
+                <a class="nav-link" href="{link MemberFunction:default}">Členské funkce</a>
+            </li>
+            *}
+        </ul>
+        {*
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        *}
+    </div>
+</nav>

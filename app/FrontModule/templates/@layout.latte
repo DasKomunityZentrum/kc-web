@@ -1,112 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
 
-	<title>{ifset title}{include title|stripHtml} - {/ifset}Nette Web</title>
+    <title>{ifset title}{include title|stripHtml} - {/ifset}Nette Web</title>
 
-	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-reboot.css">
-	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-grid.css">
-	<link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap.css">
-
-	{ifset #style}
-		{include #style}
-	{/ifset}
+    <link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap-grid.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/css/main.css">
+    {ifset #style}
+        {include #style}
+    {/ifset}
 </head>
 
 <body>
-	<header>
-		<p>KC - my problémy řešíme</p>
-	</header>
+{block header}{/block}
+	{block content}{/block}
+	{block footer}{/block}
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item {if $presenter->getName() === 'Member'}active{/if}">
-					<a class="nav-link" href="{link Member:default}">Členi KC</a>
-				</li>
-
-				<li class="nav-item {if $presenter->getName() === 'Function'}active{/if}">
-					<a class="nav-link" href="{link FunctionMember:default}">Funkce KC a jejich Členi KC</a>
-				</li>
-
-				<li class="nav-item {if $presenter->getName() === 'MemberFunction'}active{/if}">
-					<a class="nav-link" href="{link MemberFunction:default}">Členi KC a jejich Funkce KC</a>
-				</li>
-
-				<li class="nav-item {if $presenter->getName() === 'Department'}active{/if}">
-					<a class="nav-link" href="{link Department:default}">Oddělení KC</a>
-				</li>
-
-				<li class="nav-item {if $presenter->getName() === 'Meeting'}active{/if}">
-					<a class="nav-link" href="{link Meeting:default}">Zasedání KC</a>
-				</li>
-
-				<li class="nav-item {if $presenter->getName() === 'Cause'}active{/if}">
-					<a class="nav-link" href="{link Cause:default}">Kauzy KC</a>
-				</li>
-
-				{*
-				<li class="nav-item active">
-					<a class="nav-link" href="{link MemberFunction:default}">Členské funkce</a>
-				</li>
-				*}
-			</ul>
-			{*
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
-			*}
-		</div>
-	</nav>
-
-	<nav aria-label="breadcrumb bg-light navbar-light bg-light">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item">
-				<a href="{link Homepage:default}">Root KC</a>
-			</li>
-
-			{ifset #breadcrumb}
-				{include breadcrumb}
-			{else}
-				&nbsp;Drobečková navigace chybí...
-			{/ifset}
-		</ol>
-	</nav>
-
-	{* flashes *}
-	{snippet flashes}
-		{foreach $flashes as $flash}
-			<div class="alert alert-{$flash->type}">{$flash->message}</div>
-		{/foreach}
-	{/snippet}
-	{* flashes *}
-
-	<div class="container-fluid">
-		{include content}
-	</div>
-
-	<footer class="bg-light text-center text-lg-start">
-
-		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			Cítíš se být <a href="{link :Admin:Homepage:default}">Adminem</a>?
-		</div>
-
-		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			&copy; {php echo date('Y')} Webové oddělení KC
-		</div>
-	</footer>
-
-	{block scripts}
-	<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
-	<script src="{$basePath}/node_modules/jquery/dist/jquery.js"></script>
-	<script src="{$basePath}/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-	{/block}
-
+{block scripts}
+    <script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+    <script src="{$basePath}/node_modules/jquery/dist/jquery.js"></script>
+    <script src="{$basePath}/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="{$basePath}/js/openStb.js"></script>
+{/block}
+	<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        kc.basicInit();
+        {block jsInit}
+        //Init JS modules
+        {/block}
+    });
+</script>
 	{ifset #js}
-	{include #js}
-	{/ifset}
+    {include #js}
+{/ifset}
 </body>
 </html>

@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb bg-light navbar-light bg-light">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{link Homepage:default}">Root KC</a>
+        </li>
+
+        {ifset #breadcrumb}
+            {include breadcrumb}
+        {else}
+            &nbsp;Drobečková navigace chybí...
+        {/ifset}
+    </ol>
+</nav>

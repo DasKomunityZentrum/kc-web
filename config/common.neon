@@ -17,6 +17,12 @@ extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
 
 services:
+#	latte.templateFactory:
+#		factory: App\Factory\KcTemplateFactory
+#		autowired: no
+#	templateFactory:
+#		class: Nette\Application\UI\ITemplateFactory
+#		factory: App\Factory\KcTemplateFactory(@latte.templateFactory)
 	nette.latteFactory:
 		setup:
 			- addFilter(branchCount, @App\Filters\Count\BranchCountFilter)
