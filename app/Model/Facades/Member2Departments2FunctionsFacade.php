@@ -13,9 +13,7 @@ namespace App\Model\Facades;
 use App\Model\Entities\Department2Function2MemberEntity;
 use App\Model\Entities\Department2FunctionEntity;
 use App\Model\Entities\DepartmentEntity;
-use App\Model\Entities\Member2FunctionEntity;
 use App\Model\Entities\MemberEntity;
-use App\Model\Managers\DepartmentManager;
 use App\Model\Managers\MemberManager;
 
 /**
