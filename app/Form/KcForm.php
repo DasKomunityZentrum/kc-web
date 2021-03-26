@@ -11,6 +11,7 @@
 namespace App\Form;
 
 use Nette;
+use Nette\Application\UI\Form;
 use Nette\Forms\Controls;
 
 /**
@@ -18,7 +19,7 @@ use Nette\Forms\Controls;
  *
  * @package App\Form
  */
-class KcForm extends \Nette\Application\UI\Form
+class KcForm extends Form
 {
     /**
      * KcForm constructor.

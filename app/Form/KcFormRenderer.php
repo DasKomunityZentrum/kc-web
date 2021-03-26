@@ -11,6 +11,7 @@
 namespace App\Form;
 
 use Nette\Forms\Control;
+use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Rendering\DefaultFormRenderer;
 use Nette\HtmlStringable;
@@ -44,7 +45,7 @@ class KcFormRenderer extends DefaultFormRenderer
             $description = ' ' . $description;
 
         } elseif ($description != null) { // intentionally ==
-            if ($control instanceof \Nette\Forms\Controls\BaseControl) {
+            if ($control instanceof BaseControl) {
                 $description = $control->translate($description);
             }
             $description = ' ' . $this->getWrapper('control description')->setText($description);

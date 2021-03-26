@@ -49,8 +49,6 @@ class Member2Departments2FunctionsFacade
 
     /**
      * @param MemberEntity[] $members
-     * @param DepartmentEntity[] $departments
-     * @param Department2FunctionEntity[] $departments2Functions
      * @param Department2Function2MemberEntity[] $departments2Functions2Members
      *
      * @return MemberEntity[]

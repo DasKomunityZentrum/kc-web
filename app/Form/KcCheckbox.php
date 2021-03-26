@@ -10,6 +10,7 @@
 
 namespace App\Form;
 
+use Nette\Forms\Controls\Checkbox;
 use Nette\Utils\Html;
 
 /**
@@ -17,7 +18,7 @@ use Nette\Utils\Html;
  *
  * @package App\Form
  */
-class KcCheckbox extends \Nette\Forms\Controls\Checkbox
+class KcCheckbox extends Checkbox
 {
     /**
      * KcCheckbox constructor.

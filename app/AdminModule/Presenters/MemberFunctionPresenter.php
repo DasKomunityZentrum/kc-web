@@ -10,7 +10,6 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Filters\FunctionFilter;
 use App\Form\KcForm;
 use App\Model\Facades\Member2FunctionFacade;
 use App\Model\Managers\FunctionManager;

@@ -13,6 +13,7 @@ namespace App\Model\Managers;
 use dibi;
 use Dibi\Connection;
 use Dibi\Fluent;
+use Dibi\Result;
 use Dibi\Row;
 
 /**
@@ -99,7 +100,7 @@ abstract class CrudManager extends DibiManager
      * @param int $id
      * @param array $data
      *
-     * @return \Dibi\Result|int|null
+     * @return Result|int|null
      */
     public function updateByPrimaryKey(int $id, array $data)
     {
@@ -124,7 +125,7 @@ abstract class CrudManager extends DibiManager
     /**
      * @param int $id
      *
-     * @return \Dibi\Result|int|null
+     * @return Result|int|null
      */
     public function deleteByPrimaryKey(int $id)
     {

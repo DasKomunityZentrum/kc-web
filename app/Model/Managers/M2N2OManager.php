@@ -221,6 +221,7 @@ abstract class M2N2OManager extends DibiManager
 
     /**
      * @param int $leftId
+     * @param int $middleId
      * @param int $rightId
      *
      * @return Result|int|null

@@ -22,6 +22,7 @@ use App\Model\Managers\MemberManager;
 use App\Services\ProfilePhotoService;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
+use Nette\IOException;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Image;
@@ -239,7 +240,7 @@ class MemberPresenter extends Presenter
             FileSystem::delete($memberPhotoPath);
             $this->memberManager->updateByPrimaryKey($id, $profilePhotoData);
             $this->flashMessage('Profilová fotografie byla smazána', 'success');
-        } catch (\Nette\IOException $e) {
+        } catch (IOException $e) {
             $this->flashMessage('Profilovou fotografii se nepodařilo smazat', 'danger');
             Debugger::log($e->getMessage(), ILogger::WARNING);
         }

@@ -116,7 +116,7 @@ class Department2FunctionFacade
     /**
      * @param int $leftId
      *
-     * @return Department2Function2MemberEntity[]
+     * @return Department2FunctionEntity[]
      */
     public function getByLeftId(int $leftId)
     {

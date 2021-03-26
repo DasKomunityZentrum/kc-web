@@ -12,6 +12,7 @@ namespace App\Model\Managers;
 
 use App\Model\Entities\CauseEntity;
 use App\Model\Tables;
+use Dibi\Row;
 
 /**
  * Class CauseManager
@@ -40,7 +41,7 @@ class CauseManager extends CrudManager
     /**
      * @param int $memberId
      *
-     * @return array[]|\Dibi\Row[]
+     * @return Row[]
      */
     public function getByMemberId(int $memberId) : array
     {

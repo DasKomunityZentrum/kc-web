@@ -10,6 +10,7 @@
 
 namespace App\Model\Facades;
 
+use App\Model\Entities\FunctionEntity;
 use App\Model\Entities\Member2FunctionEntity;
 
 /**
@@ -36,8 +37,10 @@ class Function2MembersFacade
 
     /**
      * @param Member2FunctionEntity[] $member2Functions
+     *
+     * @return FunctionEntity[]
      */
-    public function join(array $member2Functions)
+    public function join(array $member2Functions): array
     {
         $functions = [];
 

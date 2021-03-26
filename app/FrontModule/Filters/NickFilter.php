@@ -22,7 +22,7 @@ class NickFilter
     /**
      * @param MemberEntity $memberEntity
      *
-     * @return mixed|string
+     * @return string
      */
     public function __invoke(MemberEntity $memberEntity) : string
     {

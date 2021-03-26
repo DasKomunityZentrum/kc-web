@@ -11,13 +11,14 @@
 namespace App\Model\Entities;
 
 use Dibi\DateTime;
+use Dibi\Row;
 
 /**
  * Class MeetingEntity
  *
  * @package App\Model\Entities
  */
-class MeetingEntity extends \Dibi\Row
+class MeetingEntity extends Row
 {
     /**
      * @var int $id
