@@ -17,6 +17,7 @@ use App\Model\Managers\DepartmentManager;
 use App\Model\Managers\FunctionManager;
 use App\Model\Managers\MemberManager;
 use Nette\Application\UI\Form;
+use Nette\Application\UI\Presenter;
 use Nette\Utils\ArrayHash;
 
 /**
@@ -24,7 +25,7 @@ use Nette\Utils\ArrayHash;
  *
  * @package App\AdminModule\Presenters
  */
-class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
+class DepartmentFunctionPresenter extends Presenter
 {
     /**
      * @var Department2FunctionFacade $departments2FunctionsFacade
@@ -76,7 +77,7 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         $this->memberManager = $memberManager;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -86,7 +87,7 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $relations = $this->department2FunctionFacade->getAll();
 
@@ -94,7 +95,11 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         $this->template->departmentFunctionCount = count($relations);
     }
 
-    public function actionEdit(int $departmentId = null, int $functionId = null)
+    /**
+     * @param int|null $departmentId
+     * @param int|null $functionId
+     */
+    public function actionEdit(int $departmentId = null, int $functionId = null) : void
     {
         $departments = $this->departmentManager->getPairsForSelect();
         $functions = $this->functionManager->getPairsForSelect();
@@ -119,17 +124,24 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
      * @param int|null $departmentId
      * @param int|null $functionId
      */
-    public function renderEdit(int $departmentId = null, int $functionId = null)
+    public function renderEdit(int $departmentId = null, int $functionId = null) : void
     {
     }
 
-    public function actionDelete(int $departmentId, int $functionId)
+    /**
+     * @param int $departmentId
+     * @param int $functionId
+     */
+    public function actionDelete(int $departmentId, int $functionId) : void
     {
         $this->department2FunctionManager->deleteByLeftAndRight($departmentId, $functionId);
         $this->flashMessage('Funkce Oddělení KC byla smazána', 'success');
         $this->redirect('DepartmentFunction:default');
     }
 
+    /**
+     * @return Form
+     */
     public function createComponentDepartmentFunctionForm() : Form
     {
         $form = new KcForm();
@@ -147,7 +159,11 @@ class DepartmentFunctionPresenter extends \Nette\Application\UI\Presenter
         return $form;
     }
 
-    public function departmentFunctionFormSuccess(Form $form, ArrayHash $values)
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     */
+    public function departmentFunctionFormSuccess(Form $form, ArrayHash $values) : void
     {
         $departmentId = $this->getParameter('departmentId');
         $functionId = $this->getParameter('functionId');

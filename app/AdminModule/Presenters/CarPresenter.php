@@ -51,7 +51,7 @@ class CarPresenter extends Presenter
         $this->memberManager = $memberManager;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -61,7 +61,7 @@ class CarPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $cars = $this->carManager->getAll();
 
@@ -72,7 +72,7 @@ class CarPresenter extends Presenter
     /**
      * @param int|null $id
      */
-    public function actionEdit(int $id = null)
+    public function actionEdit(int $id = null) : void
     {
         if ($id) {
             $car = $this->carManager->getByPrimaryKey($id);
@@ -85,7 +85,10 @@ class CarPresenter extends Presenter
         }
     }
 
-    public function renderEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function renderEdit(int $id = null) : void
     {
         if ($id) {
             $members = $this->memberManager->getByCarId($id);
@@ -99,7 +102,7 @@ class CarPresenter extends Presenter
     /**
      * @param int $id
      */
-    public function actionDelete(int $id)
+    public function actionDelete(int $id) : void
     {
         $this->carManager->deleteByPrimaryKey($id);
         $this->flashMessage('Auto KC bylo smazáno', 'success');
@@ -132,7 +135,7 @@ class CarPresenter extends Presenter
      * @param Form $form
      * @param ArrayHash $values
      */
-    public function carFormSuccess(Form $form, ArrayHash $values)
+    public function carFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

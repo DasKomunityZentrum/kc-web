@@ -25,7 +25,10 @@ use Nette\Utils\ArrayHash;
  */
 class FunctionPresenter extends Presenter
 {
-    public static $functionTypes = [
+    /**
+     * @var string[] $functionTypes
+     */
+    public static array $functionTypes = [
        0 => 'Běžná',
        1 => 'Čestná',
        2 => 'Placená',
@@ -50,6 +53,7 @@ class FunctionPresenter extends Presenter
     /**
      * FunctionPresenter constructor.
      *
+     * @param Department2FunctionFacade $department2FunctionFacade
      * @param FunctionManager $functionManager
      * @param Member2FunctionFacade $member2FunctionFacade
      */
@@ -65,7 +69,7 @@ class FunctionPresenter extends Presenter
         $this->member2FunctionFacade = $member2FunctionFacade;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -75,7 +79,7 @@ class FunctionPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $functions = $this->functionManager->getAll();
 
@@ -86,7 +90,7 @@ class FunctionPresenter extends Presenter
     /**
      * @param int|null $id
      */
-    public function actionEdit(int $id = null)
+    public function actionEdit(int $id = null) : void
     {
         if ($id) {
             $function = $this->functionManager->getByPrimaryKey($id);
@@ -102,7 +106,7 @@ class FunctionPresenter extends Presenter
     /**
      * @param int|null $id
      */
-    public function renderEdit(int $id = null)
+    public function renderEdit(int $id = null) : void
     {
         if ($id) {
             $members = $this->member2FunctionFacade->getByRight($id);
@@ -116,7 +120,7 @@ class FunctionPresenter extends Presenter
         $this->template->departments = $departments;
     }
 
-    public function actionDelete(int $id)
+    public function actionDelete(int $id) : void
     {
         $this->functionManager->deleteByPrimaryKey($id);
         $this->flashMessage('Funkce byla smazána', 'success');
@@ -142,7 +146,11 @@ class FunctionPresenter extends Presenter
         return $form;
     }
 
-    public function functionFormSuccess(Form $form, ArrayHash $values)
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     */
+    public function functionFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

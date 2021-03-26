@@ -32,5 +32,5 @@ class DepartmentEntity extends Row
     /**
      * @var string $description
      */
-    public $description;
+    public string $description;
 }

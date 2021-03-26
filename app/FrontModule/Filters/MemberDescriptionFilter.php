@@ -31,7 +31,7 @@ class MemberDescriptionFilter
                 if ($memberEntity->gender === 'm')  {
                     return 'Co bych vám ještě o sobě pověděl? Už vím. ' . $memberEntity->description;
                 } else {
-                    return 'Jééjku. Ještě něco o sobě mam řéct, jo? Když já nevim... ' . $memberEntity->description;
+                    return 'Jééjku. Ještě něco o sobě mam říct, jo? Když já nevim... ' . $memberEntity->description;
                 }
             } else {
                 if ($memberEntity->gender === 'm')  {

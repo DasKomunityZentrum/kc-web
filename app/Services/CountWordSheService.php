@@ -19,12 +19,19 @@ class CountWordSheService extends CountWordService
 {
     /**
      * @param int $count
+     * @param bool $tensDivided
      *
      * @return string
      */
-    public function fromZeroToTen(int $count) : string
+    public function fromZeroToTen(int $count, bool $tensDivided) : string
     {
-        if ($count === 1) {
+        if ($tensDivided) {
+            return '';
+        }
+
+        if ($count === 0) {
+            return 'nula';
+        } elseif ($count === 1) {
             return 'jedna';
         } elseif ($count === 2) {
             return 'dvě';

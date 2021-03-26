@@ -85,5 +85,4 @@ class MeetingFacade
 
         return $this->join($relations, $meetings, $members);
     }
-
 }

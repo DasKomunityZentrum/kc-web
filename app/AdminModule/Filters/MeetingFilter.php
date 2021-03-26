@@ -19,9 +19,9 @@ use App\Model\Entities\MeetingEntity;
  */
 class MeetingFilter
 {
-
     /**
      * @param MeetingEntity $meetingEntity
+     *
      * @return string
      */
     public function __invoke(MeetingEntity $meetingEntity) : string

@@ -41,17 +41,18 @@ class MemberCountFilter
      */
      public function __invoke(int $count) : string
      {
-        if ($count > 0 && $count <= 10) {
-            return $this->countWordHeService->fromZeroToTen($count);
-        } elseif ($count >  10 && $count < 20) {
-            return  $this->countWordHeService->fromElevenToNineTeen($count);
-        } elseif ($count > 20 &&  99) {
-            $tens = (int)substr((string) $count, 0, 1);
-            $units = (int)substr((string) $count, 1, 1);
+         if ($count === 0) {
+             return 'Bohužel, ještě žádnoé Zasedání nemáme';
+         } elseif ($count === 1) {
+             return 'Dneska už máme jedno Zasedání!';
+         } elseif ($count < 5) {
+             $parsed = $this->countWordHeService->parse($count);
 
-            return $this->countWordHeService->tens($tens) . ' ' . $this->countWordHeService->fromZeroToTenHe($units);
-        } else {
-            return (string)$count;
-        }
+             return 'Dneska už jsou ' . $parsed . ' Zasedání';
+         } elseif ($count >= 5) {
+             $parsed = $this->countWordHeService->parse($count);
+
+             return 'Dneska už jich je '. $parsed. ' Zasedání';
+         }
     }
 }

@@ -19,7 +19,7 @@ use Nette\Application\UI\Presenter;
  */
 class LogoutPresenter extends Presenter
 {
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -29,7 +29,7 @@ class LogoutPresenter extends Presenter
         }
     }
 
-    public function actionDefault()
+    public function actionDefault() : void
     {
         $this->user->logout(true);
         $this->flashMessage('Odhlášení bylo úspěšné', 'success');

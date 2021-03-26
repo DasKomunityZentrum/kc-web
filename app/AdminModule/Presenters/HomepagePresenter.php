@@ -6,15 +6,16 @@ namespace App\AdminModule\Presenters;
 
 use Dibi\Connection;
 use Nette;
+use Nette\Application\UI\Presenter;
 
 /**
  * Class HomepagePresenter
  *
  * @package App\AdminModule\Presenters
  */
-final class HomepagePresenter extends Nette\Application\UI\Presenter
+final class HomepagePresenter extends Presenter
 {
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -24,7 +25,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
     }
 }

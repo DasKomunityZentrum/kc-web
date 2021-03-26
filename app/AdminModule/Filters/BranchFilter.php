@@ -19,7 +19,6 @@ use App\Model\Entities\BranchEntity;
  */
 class BranchFilter
 {
-
     /**
      * @param BranchEntity $branchEntity
      *

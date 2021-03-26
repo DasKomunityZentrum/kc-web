@@ -50,7 +50,7 @@ class BranchPresenter extends Presenter
         $this->memberManager = $memberManager;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -60,7 +60,7 @@ class BranchPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $branches = $this->branchManager->getAll();
 
@@ -68,7 +68,10 @@ class BranchPresenter extends Presenter
         $this->template->branchCount = count($branches);
     }
 
-    public function actionEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function actionEdit(int $id = null) : void
     {
         if ($id) {
             $branch = $this->branchManager->getByPrimaryKey($id);
@@ -81,7 +84,10 @@ class BranchPresenter extends Presenter
         }
     }
 
-    public function renderEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function renderEdit(int $id = null) : void
     {
         if ($id) {
             $members = $this->memberManager->getByBranchId($id);
@@ -92,7 +98,10 @@ class BranchPresenter extends Presenter
         $this->template->members = $members;
     }
 
-    public function actionDelete(int $id)
+    /**
+     * @param int $id
+     */
+    public function actionDelete(int $id) : void
     {
         $this->branchManager->deleteByPrimaryKey($id);
         $this->flashMessage('Pobočka KC byla smazána', 'success');
@@ -121,7 +130,7 @@ class BranchPresenter extends Presenter
      * @param Form $form
      * @param ArrayHash $values
      */
-    public function branchFormSuccess(Form $form, ArrayHash $values)
+    public function branchFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

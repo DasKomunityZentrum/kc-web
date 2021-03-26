@@ -69,7 +69,7 @@ class MemberFunctionPresenter extends Presenter
         $this->member2FunctionFacade = $member2FunctionFacade;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -79,7 +79,10 @@ class MemberFunctionPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    /**
+     *
+     */
+    public function renderDefault() : void
     {
         $relations = $this->member2FunctionFacade->getAll();
 
@@ -87,7 +90,11 @@ class MemberFunctionPresenter extends Presenter
         $this->template->memberFunctionCount = count($relations);
     }
 
-    public function actionEdit(int $memberId = null, int $functionId = null)
+    /**
+     * @param int|null $memberId
+     * @param int|null $functionId
+     */
+    public function actionEdit(int $memberId = null, int $functionId = null) : void
     {
         $members = $this->memberManager->getPairsForSelect();
         $functions = $this->functionManager->getPairsForSelect();
@@ -107,18 +114,28 @@ class MemberFunctionPresenter extends Presenter
             ->setDefaultValue($functionId);
     }
 
-    public function actionRender(int $memberId = null, int $functionId = null)
+    /**
+     * @param int|null $memberId
+     * @param int|null $functionId
+     */
+    public function actionRender(int $memberId = null, int $functionId = null) : void
     {
-
     }
 
-    public function actionDelete(int $memberId, int $functionId)
+    /**
+     * @param int $memberId
+     * @param int $functionId
+     */
+    public function actionDelete(int $memberId, int $functionId) : void
     {
         $this->member2FunctionManager->deleteByLeftAndRight($memberId, $functionId);
         $this->flashMessage('Členská funkce byla smazána', 'success');
         $this->redirect('MemberFunction:default');
     }
 
+    /**
+     * @return Form
+     */
     public function createComponentMemberFunctionForm() : Form
     {
         $form = new KcForm();
@@ -136,7 +153,11 @@ class MemberFunctionPresenter extends Presenter
         return $form;
     }
 
-    public function memberFunctionFormSuccess(Form $form, ArrayHash $values)
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     */
+    public function memberFunctionFormSuccess(Form $form, ArrayHash $values) : void
     {
         $memberId = $this->getParameter('memberId');
         $functionId = $this->getParameter('functionId');

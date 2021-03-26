@@ -21,8 +21,10 @@ class CauseFilter
 {
     /**
      * @param CauseEntity $causeEntity
+     *
+     * @return string
      */
-    public function __invoke(CauseEntity $causeEntity)
+    public function __invoke(CauseEntity $causeEntity) : string
     {
         return $causeEntity->name;
     }

@@ -30,7 +30,7 @@ class FunctionEntity extends Row
     public string $name;
 
     /**
-     * @var string string
+     * @var string $description
      */
     public string $description;
 }

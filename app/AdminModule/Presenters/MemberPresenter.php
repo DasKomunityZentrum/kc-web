@@ -39,7 +39,7 @@ class MemberPresenter extends Presenter
     /**
      * @var string[] $memberTypes
      */
-    public static $memberTypes = [
+    public static array $memberTypes = [
         0 => 'Čestné členství',
         1 => 'Plné členství',
         2 => 'Neplacené členství',
@@ -50,12 +50,12 @@ class MemberPresenter extends Presenter
     /**
      * @var string[] $memberActive
      */
-    public static $memberActive = [
+    public static array $memberActive = [
         0 => 'Neaktivní',
         1 => 'Aktivní'
     ];
 
-    public static $memberGender = [
+    public static array $memberGender = [
         'm' => 'Muž',
         'f' => 'Žena'
     ];
@@ -142,7 +142,7 @@ class MemberPresenter extends Presenter
         $this->member2Departments2FunctionsFacade = $member2Departments2FunctionsFacade;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -152,7 +152,7 @@ class MemberPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $members = $this->memberFacade->getAll();
 
@@ -163,7 +163,7 @@ class MemberPresenter extends Presenter
     /**
      * @param int|null $id
      */
-    public function actionEdit(int $id = null)
+    public function actionEdit(int $id = null) : void
     {
         $cars = $this->carManager->getPairsForSelect();
         $branches = $this->branchManager->getPairsForSelect();
@@ -182,7 +182,7 @@ class MemberPresenter extends Presenter
         }
     }
 
-    public function renderEdit(int $id = null)
+    public function renderEdit(int $id = null) : void
     {
         if ($id) {
             $functions = $this->member2FunctionFacade->getByLeft($id);
@@ -209,14 +209,14 @@ class MemberPresenter extends Presenter
     /**
      * @param int $id
      */
-    public function actionDelete(int $id)
+    public function actionDelete(int $id) : void
     {
         $this->memberManager->deleteByPrimaryKey($id);
         $this->flashMessage('Člen KC byl smazán.', 'success');
         $this->redirect('Member:default');
     }
 
-    public function actionDeleteProfilePhoto(int $id)
+    public function actionDeleteProfilePhoto(int $id) : void
     {
         $member = $this->memberManager->getByPrimaryKey($id);
 
@@ -296,9 +296,8 @@ class MemberPresenter extends Presenter
     /**
      * @param Form $form
      * @param ArrayHash $values
-     * @param $
      */
-    public function memberFormSuccess(Form $form, ArrayHash $values, )
+    public function memberFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

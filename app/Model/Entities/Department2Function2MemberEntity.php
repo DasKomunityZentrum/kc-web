@@ -33,5 +33,4 @@ class Department2Function2MemberEntity extends Row
      * @var MemberEntity $memberEntity
      */
     public MemberEntity $memberEntity;
-
 }

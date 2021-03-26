@@ -40,6 +40,9 @@ class ProfilePhotoService
         return $this->wwwDir . $sep . $this->getRelativeDir();
     }
 
+    /**
+     * @return string
+     */
     public function getRelativeDir() : string
     {
         $sep = DIRECTORY_SEPARATOR;

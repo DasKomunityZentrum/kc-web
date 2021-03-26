@@ -26,6 +26,9 @@ use Nette\Utils\ArrayHash;
  */
 class MeetingPresenter extends Presenter
 {
+    /**
+     * @var array|string[] $meetingTypes
+     */
     public static array $meetingTypes = [
         0 => 'V KC',
         1 => 'Výjezdní',
@@ -74,7 +77,7 @@ class MeetingPresenter extends Presenter
         $this->memberManager = $memberManager;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -84,7 +87,7 @@ class MeetingPresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $meetings = $this->meetingFacade->getAll();
 
@@ -92,7 +95,10 @@ class MeetingPresenter extends Presenter
         $this->template->meetingCount = count($meetings);
     }
 
-    public function actionEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function actionEdit(int $id = null) : void
     {
         $allMembers = $this->memberManager->getPairsForSelect();
 
@@ -113,12 +119,17 @@ class MeetingPresenter extends Presenter
         }
     }
 
-    public function renderEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function renderEdit(int $id = null) : void
     {
-
     }
 
-    public function actionDelete(int $id)
+    /**
+     * @param int $id
+     */
+    public function actionDelete(int $id) : void
     {
         $this->meetingManager->deleteByPrimaryKey($id);
         $this->member2MeetingManager->deleteByRightId($id);
@@ -126,6 +137,9 @@ class MeetingPresenter extends Presenter
         $this->redirect('Meeting:default');
     }
 
+    /**
+     * @return Form
+     */
     public function createComponentMeetingForm() : Form
     {
         $form = new KcForm();
@@ -143,7 +157,11 @@ class MeetingPresenter extends Presenter
         return $form;
     }
 
-    public function meetingFormSuccess(Form $form, ArrayHash $values)
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     */
+    public function meetingFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

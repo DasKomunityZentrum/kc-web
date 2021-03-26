@@ -77,7 +77,7 @@ class MemberEntity extends Row
     public int $type;
 
     /**
-     * @var int $carId
+     * @var ?int $carId
      */
     public ?int $carId;
 

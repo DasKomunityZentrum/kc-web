@@ -19,10 +19,11 @@ abstract class CountWordService
 {
     /**
      * @param int $count
+     * @param bool $tensDivided
      *
      * @return string
      */
-    abstract public function fromZeroToTen(int $count) : string;
+    abstract public function fromZeroToTen(int $count, bool $tensDivided) : string;
 
     /**
      * @param int $count
@@ -87,15 +88,16 @@ abstract class CountWordService
      */
     public function parse(int $count) : string
     {
-        if ($count > 0 && $count <= 10) {
-            return $this->fromZeroToTen($count);
+        if ($count >= 0 && $count <= 10) {
+            return $this->fromZeroToTen($count, false);
         } elseif ($count >  10 && $count < 20) {
             return  $this->fromElevenToNineTeen($count);
         } elseif ($count > 20 &&  99) {
             $tens = (int)substr((string) $count, 0, 1);
             $units = (int)substr((string) $count, 1, 1);
+            $tensDivided = $count % 10 === 0;
 
-            return $this->tens($tens) . ' ' . $this->fromZeroToTen($units);
+            return $this->tens($tens) . ' ' . $this->fromZeroToTen($units, $tensDivided);
         } else {
             return (string)$count;
         }

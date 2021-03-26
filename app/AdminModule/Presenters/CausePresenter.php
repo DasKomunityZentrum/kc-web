@@ -29,7 +29,7 @@ class CausePresenter extends Presenter
     /**
      * @var string[] $causeStates
      */
-    public static $causeStates = [
+    public static array $causeStates = [
         0 => 'Otevřená',
         1 => 'V řešení',
         2 => 'Vyřešeno',
@@ -78,7 +78,7 @@ class CausePresenter extends Presenter
         $this->memberManager = $memberManager;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -88,7 +88,7 @@ class CausePresenter extends Presenter
         }
     }
 
-    public function renderDefault()
+    public function renderDefault() : void
     {
         $causes = $this->causeFacade->getAll();
 
@@ -96,7 +96,10 @@ class CausePresenter extends Presenter
         $this->template->causeCount = count($causes);
     }
 
-    public function actionEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function actionEdit(int $id = null) : void
     {
         $members = $this->memberManager->getPairsForSelect();
         $departments = $this->departmentManager->getPairsForSelect();
@@ -115,18 +118,26 @@ class CausePresenter extends Presenter
         }
     }
 
-    public function renderEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function renderEdit(int $id = null) : void
     {
-
     }
 
-    public function actionDelete(int $id)
+    /**
+     * @param int $id
+     */
+    public function actionDelete(int $id) : void
     {
         $this->causeManager->deleteByPrimaryKey($id);
         $this->flashMessage('Kauza KC byla smazána', 'success');
         $this->redirect('Cause:default');
     }
 
+    /**
+     * @return Form
+     */
     public function createComponentCauseForm(): Form
     {
         $form = new KcForm();
@@ -153,7 +164,11 @@ class CausePresenter extends Presenter
         return $form;
     }
 
-    public function causeFormSuccess(Form $form, ArrayHash $values)
+    /**
+     * @param Form $form
+     * @param ArrayHash $values
+     */
+    public function causeFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

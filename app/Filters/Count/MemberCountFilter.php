@@ -48,7 +48,7 @@ class MemberCountFilter
         } elseif ($count < 5) {
             $parsed = $this->countWordHeService->parse($count);
 
-            return 'Dneska už máme ' . $parsed . ' Členi';
+            return 'Dneska už máme ' . $parsed . ' Členy';
         } elseif ($count >= 5) {
             $parsed = $this->countWordHeService->parse($count);
 

@@ -40,7 +40,6 @@ class NickFilter
                 } else {
                     $nickSentence .= ' mi říkali';
                 }
-
             } elseif ($memberEntity->gender === 'f') {
                 $nickSentence .= 'Kámošky';
 
@@ -67,7 +66,6 @@ class NickFilter
                 } else {
                     $nickSentence .= 'neříkal ';
                 }
-
             } elseif ($memberEntity->gender === 'f') {
                 $nickSentence .= ' kámošky, pač mi';
 

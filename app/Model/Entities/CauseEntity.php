@@ -19,17 +19,38 @@ use Dibi\Row;
  */
 class CauseEntity extends Row
 {
-
+    /**
+     * @var int  $id
+     */
     public int $id;
 
+    /**
+     * @var int $memberId
+     */
     public int $memberId;
 
+    /**
+     * @var string $name
+     */
+    public string $name;
+
+    /**
+     * @var string $description
+     */
     public string $description;
 
+    /**
+     * @var string $conclusion
+     */
     public string $conclusion;
 
+    /**
+     * @var MemberEntity $memberEntity
+     */
     public MemberEntity $memberEntity;
 
+    /**
+     * @var DepartmentEntity $departmentEntity
+     */
     public DepartmentEntity $departmentEntity;
-
 }

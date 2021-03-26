@@ -36,6 +36,9 @@ class DepartmentPresenter extends Presenter
      */
     private Department2FunctionFacade $department2FunctionFacade;
 
+    /**
+     * @var Department2Functions2MembersFacade $department2Functions2MembersFacade
+     */
     private Department2Functions2MembersFacade $department2Functions2MembersFacade;
 
     /**
@@ -43,6 +46,7 @@ class DepartmentPresenter extends Presenter
      *
      * @param DepartmentManager $departmentManager
      * @param Department2FunctionFacade $department2FunctionFacade
+     * @param Department2Functions2MembersFacade $department2Functions2MembersFacade
      */
     public function __construct(
         DepartmentManager $departmentManager,
@@ -56,7 +60,7 @@ class DepartmentPresenter extends Presenter
         $this->department2Functions2MembersFacade = $department2Functions2MembersFacade;
     }
 
-    public function startup()
+    public function startup() : void
     {
         parent::startup();
 
@@ -74,7 +78,10 @@ class DepartmentPresenter extends Presenter
         $this->template->departmentCount = count($departments);
     }
 
-    public function actionEdit(int $id = null)
+    /**
+     * @param int|null $id
+     */
+    public function actionEdit(int $id = null) : void
     {
         if ($id) {
             $department = $this->departmentManager->getByPrimaryKey($id);
@@ -90,7 +97,7 @@ class DepartmentPresenter extends Presenter
     /**
      * @param int|null $id
      */
-    public function renderEdit(int $id = null)
+    public function renderEdit(int $id = null) : void
     {
         if ($id) {
             $functions = $this->department2FunctionFacade->getByLeftId($id);
@@ -134,7 +141,7 @@ class DepartmentPresenter extends Presenter
      * @param Form $form
      * @param ArrayHash $values
      */
-    public function departmentFormSuccess(Form $form, ArrayHash $values)
+    public function departmentFormSuccess(Form $form, ArrayHash $values) : void
     {
         $id = $this->getParameter('id');
 

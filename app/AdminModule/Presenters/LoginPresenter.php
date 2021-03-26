@@ -13,6 +13,7 @@ namespace App\AdminModule\Presenters;
 use App\Form\KcForm;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
+use Nette\Security\AuthenticationException;
 use Nette\Utils\ArrayHash;
 
 /**
@@ -22,7 +23,7 @@ use Nette\Utils\ArrayHash;
  */
 class LoginPresenter extends Presenter
 {
-    public function actionDefault()
+    public function actionDefault() : void
     {
         if ($this->user->loggedIn) {
             $this->flashMessage('Už jste přihlášený, není potřeba se znovu přihlašovat', 'info');
@@ -57,12 +58,12 @@ class LoginPresenter extends Presenter
      * @param Form $form
      * @param ArrayHash $values
      */
-    public function loginFormSuccess(Form $form, ArrayHash $values)
+    public function loginFormSuccess(Form $form, ArrayHash $values) : void
     {
         try {
             $this->user->login($values->username, $values->password);
             $this->redirect('Homepage:default');
-        } catch (\Nette\Security\AuthenticationException $e) {
+        } catch (AuthenticationException $e) {
             $this->flashMessage('Uživatelské jméno nebo heslo je nesprávné');
         }
     }
