@@ -7,3 +7,4 @@ log
 www/node_modules
 www/images
 www/images/profile_photos
+/nbproject/private/
