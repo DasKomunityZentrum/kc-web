@@ -1,49 +1,106 @@
 <?php
-
 /**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ *
+ * Created by PhpStorm.
+ * Filename: KcTemplateFactory.php
+ * User: Tomáš Babický
+ * Date: 27.03.2021
+ * Time: 3:13
  */
-
-declare(strict_types=1);
 
 namespace App\Factory;
 
-use Latte;
-use Nette;
+use Latte\Engine;
+use Latte\Runtime\FilterInfo;
 use Nette\Application\UI;
+use Nette\Application\UI\Presenter;
+use Nette\Bridges\ApplicationLatte\DefaultTemplate;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
+use Nette\Bridges\ApplicationLatte\SnippetBridge;
+use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Bridges\ApplicationLatte\UIMacros;
+use Nette\Bridges\CacheLatte\CacheMacro;
+use Nette\Bridges\FormsLatte\FormMacros;
+use Nette\Caching\Storage;
+use Nette\Http\IRequest;
+use Nette\InvalidArgumentException;
+use Nette\InvalidStateException;
+use Nette\Security\User;
+use Nette\SmartObject;
+use Nette\Utils\Arrays;
+use Nette\Utils\DateTime;
+use Traversable;
 
-
-/**
- * Latte powered template factory.
- */
-class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
+class KcTemplateFactory implements UI\TemplateFactory
 {
+    use SmartObject;
+
+    /** @var array<callable(Template): void>  Occurs when a new template is created */
+    public $onCreate = [];
+
+    /** @var LatteFactory */
+    private $latteFactory;
+
+    /** @var IRequest|null */
+    private $httpRequest;
+
+    /** @var User|null */
+    private $user;
+
+    /** @var Storage|null */
+    private $cacheStorage;
+
+    /** @var string */
+    private $templateClass;
+
+    public function __construct(
+        LatteFactory $latteFactory,
+        IRequest $httpRequest = null,
+        User $user = null,
+        Storage $cacheStorage = null,
+        $templateClass = null
+    ) {
+        $this->latteFactory = $latteFactory;
+        $this->httpRequest = $httpRequest;
+        $this->user = $user;
+        $this->cacheStorage = $cacheStorage;
+        if ($templateClass && (!class_exists($templateClass) || !is_a($templateClass, Template::class, true))) {
+            throw new  InvalidArgumentException("Class $templateClass does not implement " . Template::class . ' or it does not exist.');
+        }
+        $this->templateClass = $templateClass ?: DefaultTemplate::class;
+    }
 
     /** @return Template */
     public function createTemplate(UI\Control $control = null, string $class = null): UI\Template
     {
         $class = $class ?? $this->templateClass;
         if (!is_a($class, Template::class, true)) {
-            throw new Nette\InvalidArgumentException("Class $class does not implement " . Template::class . ' or it does not exist.');
+            throw new InvalidArgumentException("Class $class does not implement " . Template::class . ' or it does not exist.');
         }
 
         $latte = $this->latteFactory->create();
         $template = new $class($latte);
+
         $presenter = $control ? $control->getPresenterIfExists() : null;
 
-        if ($latte->onCompile instanceof \Traversable) {
+        // KC IMPROVEMENT BEGIN
+        $dirName = dirname($presenter->getReflection()->getFileName());
+        $layoutFile = str_replace('Presenters', 'templates', $dirName) . '\@layout.latte';
+
+        $template->add('layoutFile', $layoutFile);
+        // KC IMPROVEMENT END
+
+        if ($latte->onCompile instanceof Traversable) {
             $latte->onCompile = iterator_to_array($latte->onCompile);
         }
 
-        array_unshift($latte->onCompile, function (Latte\Engine $latte) use ($control, $template): void {
+        array_unshift($latte->onCompile, function (Engine $latte) use ($control, $template): void {
             if ($this->cacheStorage) {
-                $latte->getCompiler()->addMacro('cache', new Nette\Bridges\CacheLatte\CacheMacro);
+                $latte->getCompiler()->addMacro('cache', new CacheMacro);
             }
             UIMacros::install($latte->getCompiler());
-            if (class_exists(Nette\Bridges\FormsLatte\FormMacros::class)) {
-                Nette\Bridges\FormsLatte\FormMacros::install($latte->getCompiler());
+            if (class_exists(FormMacros::class)) {
+                FormMacros::install($latte->getCompiler());
             }
             if ($control) {
                 $control->templatePrepareFilters($template);
@@ -52,13 +109,13 @@ class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
 
         $latte->addFilter('modifyDate', function ($time, $delta, $unit = null) {
             return $time
-                ? Nette\Utils\DateTime::from($time)->modify($delta . $unit)
+                ? DateTime::from($time)->modify($delta . $unit)
                 : null;
         });
 
         if (!isset($latte->getFilters()['translate'])) {
-            $latte->addFilter('translate', function (Latte\Runtime\FilterInfo $fi): void {
-                throw new Nette\InvalidStateException('Translator has not been set. Set translator using $template->setTranslator().');
+            $latte->addFilter('translate', function (FilterInfo $fi): void {
+                throw new InvalidStateException('Translator has not been set. Set translator using $template->setTranslator().');
             });
         }
 
@@ -71,7 +128,7 @@ class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
         $baseUrl = $this->httpRequest
             ? rtrim($this->httpRequest->getUrl()->withoutUserInfo()->getBaseUrl(), '/')
             : null;
-        $flashes = $presenter instanceof UI\Presenter && $presenter->hasFlashSession()
+        $flashes = $presenter instanceof Presenter && $presenter->hasFlashSession()
             ? (array) $presenter->getFlashSession()->{$control->getParameterId('flash')}
             : [];
 
@@ -82,17 +139,7 @@ class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
             'flashes' => $flashes,
             'control' => $control,
             'presenter' => $presenter,
-            'templateDir' => 'z',
         ];
-
-     //   list(, $presenter) = Helpers::splitName($this->getName());
-        $dir = dirname($presenter->getReflection()->getFileName());
-        bdump($dir);
-        //$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
-       // return [
-         //   "$dir/templates/$presenter/$this->view.latte",
-           // "$dir/templates/$presenter.$this->view.latte",
-       // ];
 
         foreach ($params as $key => $value) {
             if ($value !== null && property_exists($template, $key)) {
@@ -103,7 +150,7 @@ class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
         if ($control) {
             $latte->addProvider('uiControl', $control);
             $latte->addProvider('uiPresenter', $presenter);
-            $latte->addProvider('snippetBridge', new Nette\Bridges\ApplicationLatte\SnippetBridge($control));
+            $latte->addProvider('snippetBridge', new SnippetBridge($control));
             if ($presenter) {
                 $header = $presenter->getHttpResponse()->getHeader('Content-Security-Policy')
                     ?: $presenter->getHttpResponse()->getHeader('Content-Security-Policy-Report-Only');
@@ -113,7 +160,7 @@ class KcTemplateFactory extends Nette\Bridges\ApplicationLatte\TemplateFactory
         }
         $latte->addProvider('cacheStorage', $this->cacheStorage);
 
-        Nette\Utils\Arrays::invoke($this->onCreate, $template);
+        Arrays::invoke($this->onCreate, $template);
 
         return $template;
     }
